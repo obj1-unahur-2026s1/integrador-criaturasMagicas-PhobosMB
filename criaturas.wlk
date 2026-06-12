@@ -3,13 +3,17 @@ import roles.*
 class Criaturas{
     var property poderMagico
     var property astucia
-    var property rol 
+    var property rol
 
     method poderMagico() = poderMagico
 
     method esAstuto()
 
-    method esFormidable() = self.esAstuto() || rol.esExtraordinario(self)
+    method cambioDeRol(){
+        rol = rol.rolSiguiente()
+    }
+
+    method esFormidable() = self.esAstuto() || self.rol().esExtraordinario(self)
 
     method poderOfensivo() = (poderMagico * 10) + self.rol().extraRol()
 }
@@ -17,7 +21,7 @@ class Criaturas{
 class Duende inherits Criaturas{
     override method esAstuto() = false
     
-    override method poderOfensivo() = super() + self.poderOfensivo()*0.1
+    override method poderOfensivo() = super() * 1.1
 }
 
 class Hadas inherits Criaturas{
