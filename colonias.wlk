@@ -10,7 +10,7 @@ class Colonias{
             criaturas.addAll(coloniaInvasora.criaturas())
         }
         else{
-            coloniaInvasora.criaturas().map({c => c.poderMagico(c.poderMagico()-c.poderMagico()*1.15)})
+            coloniaInvasora.criaturas().map({c => c.poderMagico(c.poderMagico()-c.poderMagico()*0.15)})
         }
     }
 
