@@ -9,7 +9,7 @@ class Rol{
 class Guardian inherits Rol{
     override method extraRol() = 100
     override method esExtraordinario(criatura) = criatura.poderMagico() > 50
-    override method rolSiguiente() = Domador(mascota.add(new Mascota(edad = 1, tieneCuernos = false)))
+    override method rolSiguiente() = new Domador(mascotas=[new Mascota(edad = 1, tieneCuernos = false)])
 }
 
 class Hechicero inherits Rol{
@@ -24,7 +24,14 @@ class Domador inherits Rol{
     override method extraRol() = 150*mascotas.count({m => m.tieneCuernos()})
     override method esExtraordinario(criatura) = 
         criatura.poderMagico() >= 15 && mascotas.all({c => c.edad()>10})
-    override method rolSiguiente() =
+    override method rolSiguiente() { 
+        if(mascotas.any({c => c.tieneCuernos()})){
+            return Hechicero
+        }
+        else{
+            self.error("Ritual cancelado")
+        }
+    }
 }
 
 class Mascota{
